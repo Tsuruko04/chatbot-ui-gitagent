@@ -357,7 +357,7 @@ const Home = ({
       }}
     >
       <Head>
-        <title>ToolLLaMA UI</title>
+        <title>Gitagent</title>
         <meta name="description" content="ChatGPT but better." />
         <meta
           name="viewport"

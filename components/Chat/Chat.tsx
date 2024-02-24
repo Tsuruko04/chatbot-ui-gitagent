@@ -353,38 +353,39 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
       <>
         <div className="mx-auto flex flex-col space-y-5 md:space-y-10 px-3 pt-5 md:pt-12 sm:max-w-[600px]">
           <div className="text-center text-3xl font-semibold text-gray-800 dark:text-gray-100">
-            ToolLLaMA UI
+            GitAgent
           </div>
 
           {
             // models.length > 0 &&
-            (
-              <div className="flex h-full flex-col space-y-4 rounded-lg border border-neutral-200 p-4 dark:border-neutral-600">
-                <ModelSelect />
+            // (
+            //   <div className="flex h-full flex-col space-y-4 rounded-lg border border-neutral-200 p-4 dark:border-neutral-600">
+            //     <ModelSelect />
 
-                {/*<SystemPrompt*/}
-                {/*  conversation={selectedConversation}*/}
-                {/*  prompts={[]}*/}
-                {/*  // prompts*/}
+            //     {/*<SystemPrompt*/}
+            //     {/*  conversation={selectedConversation}*/}
+            //     {/*  prompts={[]}*/}
+            //     {/*  // prompts*/}
 
-                {/*  onChangePrompt={(prompt) =>*/}
-                {/*    handleUpdateConversation(selectedConversation, {*/}
-                {/*      key: 'prompt',*/}
-                {/*      value: prompt,*/}
-                {/*    })*/}
-                {/*  }*/}
-                {/*/>*/}
-                <TopKSlider
-                  label={t('Temperature')}
-                  onChangeTopK={(top_k) =>
-                    handleUpdateConversation(selectedConversation, {
-                      key: 'top_k',
-                      value: top_k,
-                    })
-                  }
-                />
-              </div>
-            )}
+            //     {/*  onChangePrompt={(prompt) =>*/}
+            //     {/*    handleUpdateConversation(selectedConversation, {*/}
+            //     {/*      key: 'prompt',*/}
+            //     {/*      value: prompt,*/}
+            //     {/*    })*/}
+            //     {/*  }*/}
+            //     {/*/>*/}
+            //     <TopKSlider
+            //       label={t('Temperature')}
+            //       onChangeTopK={(top_k) =>
+            //         handleUpdateConversation(selectedConversation, {
+            //           key: 'top_k',
+            //           value: top_k,
+            //         })
+            //       }
+            //     />
+            //   </div>
+            // )
+          }
         </div>
       </>
     )
