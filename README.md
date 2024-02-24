@@ -1,6 +1,6 @@
 # ToolLLaMA UI
 
-ToolLLaMA UI is an open source chat UI for [ToolBench](https://github.com/OpenBMB/ToolBench)
+GitAgent UI is an open source chat UI for GitAgent.
 
 
 ## Deploy
@@ -16,8 +16,8 @@ Host your own live version of ToolLLaMA UI with Vercel.
 Build locally:
 
 ```shell
-docker build -t chatgpt-ui-toolllama .
-docker run -e -p 3000:3000 chatgpt-ui-toolllama
+docker build -t chatgpt-ui-gitagent .
+docker run -e -p 3000:3000 chatgpt-ui-gitagent
 ```
 
 ## Running Locally
@@ -25,7 +25,7 @@ docker run -e -p 3000:3000 chatgpt-ui-toolllama
 **1. Clone Repo**
 
 ```bash
-git clone https://github.com/lilbillybiscuit/chatbot-ui-toolllama.git
+git clone https://github.com/Tsuruko04/chatbot-ui-gitagent.git
 ```
 
 **2. Install Dependencies**
