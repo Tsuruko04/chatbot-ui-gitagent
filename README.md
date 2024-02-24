@@ -1,4 +1,4 @@
-# ToolLLaMA UI
+# GitAgent UI
 
 GitAgent UI is an open source chat UI for GitAgent.
 
