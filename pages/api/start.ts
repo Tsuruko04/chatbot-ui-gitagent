@@ -9,14 +9,13 @@ export const config = {
 
 const handler = async (req: Request): Promise<Response> => {
   try {
-    const result = await fetch('http://localhost:5000/start', {
+    const result = await fetch('http://127.0.0.1:5000/start/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: await req.text(),
     });
-
     return new Response(await result.json());
   } catch (error) {
     console.error(error);

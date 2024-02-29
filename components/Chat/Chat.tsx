@@ -101,7 +101,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
           start_time: startTime,
         };
         console.log("updatedConversation", updatedConversation)
-
+        
         const result = await fetch("api/start", {
           method: 'POST',
           headers: {
@@ -112,7 +112,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
         console.log("fetch done", result)
 
         while (true) {
-          const response = await fetch("api/chat/?start_time=" + startTime, {
+          const response = await fetch("api/chat/?query="+query+"&start_time=" + startTime, {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json',

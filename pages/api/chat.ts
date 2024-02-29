@@ -9,13 +9,13 @@ export const config = {
 
 const handler = async (req: Request): Promise<Response> => {
   try {
-    const result = await fetch('http://localhost:5000/log/?' + req.url.split('?')[1], {
+    const result = await fetch('http://127.0.0.1:5000/log/?' + req.url.split('?')[1], {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
         },
     });
-
+    console.log("url",'http://127.0.0.1:5000/log/?' + req.url.split('?')[1])
     console.log("forward from", result);
     const json = await result.json();
     console.log("json", json);
