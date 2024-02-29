@@ -93,12 +93,63 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
         homeDispatch({ field: 'messageIsStreaming', value: true });
         console.log("Set messageIsStreaming to true");
 
-        const chatBody: ChatBody = {
-          method: updatedConversation.method,
-          messages: updatedConversation.messages,
-          top_k: updatedConversation.top_k,
+        // timestamp
+        const startTime = new Date().getTime();
+        const query = updatedConversation.messages[0].content;
+        const chatBody = {
+          query: query,
+          start_time: startTime,
         };
         console.log("updatedConversation", updatedConversation)
+
+        const result = await fetch("api/start", {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(chatBody),
+        });
+        console.log("fetch done", result)
+
+        while (true) {
+          const response = await fetch("api/chat/?start_time=" + startTime, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          });
+          console.log("get log res", response);
+          const result = await response.json();
+          console.log("get log", result);
+
+          const updatedMessages: Message[] = [
+            {role: "user", content: query, tools: [], recommendations: []},
+            { role: 'assistant', content: "ha", tools: result, recommendations: []},
+          ];
+          updatedConversation = {...updatedConversation, messages: updatedMessages};
+          homeDispatch({field: 'selectedConversation', value: updatedConversation});
+
+          if (result[result.length - 1].method_name === "final_result") {
+            break;
+          }
+        }
+
+        console.log("updatedConversation", updatedConversation);
+        saveConversation(updatedConversation);
+        const updatedConversations: Conversation[] = conversations.map( (conversation) => {
+            if (conversation.id === selectedConversation.id) return updatedConversation;
+            return conversation;
+          },
+        );
+        if (updatedConversations.length === 0) {
+          updatedConversations.push(updatedConversation);
+        }
+        homeDispatch({ field: 'conversations', value: updatedConversations });
+        saveConversations(updatedConversations);
+        homeDispatch({ field: 'loading', value: false });
+        homeDispatch({ field: 'messageIsStreaming', value: false });
+
+        return;
         const endpoint = "api/chat";
         let body;
         body = JSON.stringify(chatBody);
