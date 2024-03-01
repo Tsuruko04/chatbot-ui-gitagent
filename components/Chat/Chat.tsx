@@ -123,7 +123,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
             },
           });
           console.log("get log res", response);
-          const result = await response.json();
+          const result = (await response.json())["log"];
           console.log("get log", result);
 
           const updatedMessages: Message[] = [
