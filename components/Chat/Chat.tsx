@@ -36,7 +36,9 @@ import ProgressCardController from "@/components/Chat/ProgressCards/ProgressCard
 interface Props {
   stopConversationRef: MutableRefObject<boolean>;
 }
-
+async function sleep(ms: number){
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
 export const Chat = memo(({ stopConversationRef }: Props) => {
   const { t } = useTranslation('chat');
 
@@ -98,7 +100,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
         const query = updatedConversation.messages[0].content;
         const chatBody = {
           query: query,
-          start_time: startTime,
+          start_time: startTime
         };
         console.log("updatedConversation", updatedConversation)
         
@@ -109,9 +111,11 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
           },
           body: JSON.stringify(chatBody),
         });
+        console.log("body: ",JSON.stringify(chatBody))
         console.log("fetch done", result)
 
         while (true) {
+          await sleep(2000)
           const response = await fetch("api/chat/?query="+query+"&start_time=" + startTime, {
             method: 'GET',
             headers: {
@@ -129,7 +133,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
           updatedConversation = {...updatedConversation, messages: updatedMessages};
           homeDispatch({field: 'selectedConversation', value: updatedConversation});
 
-          if (result[result.length - 1].method_name === "final_result") {
+          if (result.legnth&&result[result.length - 1].method_name === "final_result") {
             break;
           }
         }
